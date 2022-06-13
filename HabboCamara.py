@@ -1,6 +1,7 @@
 import requests
 import os
 import json
+import pathlib
 
 HabboNombre = input("Escribe el habbo Nombre: ")
 habbo = requests.get(f"https://www.habbo.es/api/public/users?name={HabboNombre}")
@@ -13,8 +14,11 @@ data = requests.get(url).json()
 Nombre_carpeta= input("Escribe el nombre de la carpeta: ")
 os.system("cls")
 Carpeta=f"{Nombre_carpeta}"
-os.mkdir(os.path.join(os.getcwd(),Carpeta))
-os.chdir(os.path.join(os.getcwd(),Carpeta))
+pathlib.Path(Carpeta).mkdir(parents=True, exist_ok=True)
+os.chdir(os.path.join(os.getcwd(),Carpeta)) 
+
+#os.mkdir(os.path.join(os.getcwd(),Carpeta))
+
 i = 1 
 for key in data:
     imagen_url = 'https:' + key['url']
